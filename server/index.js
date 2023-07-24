@@ -9,10 +9,7 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 
 const io = new Server (server, {
-    cors: {
-        origin: "https://server-online-coding-production.up.railway.app/",
-        methods: ["GET", "POST"],
-    },
+
 });
 
 const connectedUsers = new Map(); //creating a map to track all users connected to a certain room (code block)
