@@ -4,13 +4,13 @@ const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const server = http.createServer(app);
+const path = require('path');
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 
-const io = new Server (server, {
 
-});
+const io = new Server (server);
 
 const connectedUsers = new Map(); //creating a map to track all users connected to a certain room (code block)
 const roomsById = new Map(); //creating a map to track all users connected to a certain room (code block) according to socket id
@@ -63,6 +63,12 @@ io.on("connection", (socket) => {
           console.log(`Number of users connected to code block ${codeBlockName}: ${connectedUsers.get(codeBlockName)}`);
        }
     });
+});
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 server.listen(PORT, () =>{
