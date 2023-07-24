@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 
 const io = new Server (server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://server-online-coding-production.up.railway.app/",
         methods: ["GET", "POST"],
     },
 });
